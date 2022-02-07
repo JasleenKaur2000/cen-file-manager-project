@@ -1,11 +1,15 @@
 import React from "react";
 import "styles/main.scss";
+//import Homepage from "./components/Homepage/Homepage";
+import Mainpage from "components/Navbar/Mainpage";
 
 function App() {
   return (
-    <div className="App">
-      Welcome! Folks
-    </div>
+    <>
+      <div className="App">
+        <Mainpage />
+      </div>
+    </>
   );
 }
 

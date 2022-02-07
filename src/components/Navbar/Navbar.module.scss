@@ -1,5 +1,9 @@
 @import "styles/variables";
 
 .header {
-    background: $bg-blue;
+  position: absolute;
+  width: 959px;
+  height: 44px;
+  left: 431px;
+  top: 49px;
 }
