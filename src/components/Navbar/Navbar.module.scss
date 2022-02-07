@@ -1,9 +1,72 @@
 @import "styles/variables";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap");
 
 .header {
   position: absolute;
-  width: 959px;
-  height: 44px;
-  left: 431px;
-  top: 49px;
+  width: 64%;
+  height: 50px;
+  left: 30%;
+  top: 5%;
+  border-radius: 15px;
+  background: rgb(179, 219, 235);
+}
+.menu {
+  width: 100%;
+  overflow: auto;
+  border-radius: 15px;
+  background: rgb(179, 219, 235);
+}
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 50px;
+}
+.menu li {
+  float: right;
+  padding: 0px 20px 5px 5px;
+}
+.menu ul li a {
+  width: 100px;
+  transition: all 0.3s ease 0s;
+}
+.menu li a:hover {
+  position: relative;
+  color: rgb(168, 18, 228);
+  width: 100px;
+  height: auto;
+  display: block;
+  z-index: 999;
+}
+
+.search_bar {
+  margin: 15px;
+  margin-left: 100px;
+  float: left;
+}
+input {
+  border-radius: 5px;
+  width: 500px;
+}
+input[type="text"] {
+  padding: 7px;
+  border: none;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+input::placeholder {
+  padding: 7px;
+  border: none;
+  font-size: 20px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+button {
+  float: left;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  padding: 7px;
+  border: none;
+  font-size: 20px;
 }
