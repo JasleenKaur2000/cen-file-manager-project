@@ -16,10 +16,9 @@ function Form({ setShowDash }) {
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log("jghv");
     if (pin.length != 4) {
       setHasError(true);
-      setErrorMessage("*pin must be of length 4");
+      setErrorMessage("*pin must not exceed 4 numbers");
       return;
     }
     if (pin === confirmedPin) {
@@ -28,9 +27,8 @@ function Form({ setShowDash }) {
       setShowDash(true);
     } else {
       setHasError(true);
-      setErrorMessage("*pin does not matches");
+      setErrorMessage("*reenter the same pin");
     }
-
     return;
   };
 
