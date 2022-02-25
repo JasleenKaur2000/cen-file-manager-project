@@ -1,29 +1,34 @@
 import React from "react";
-import "styles/Home.scss";
+import classes from "styles/Home.module.scss";
 import Form from "./Form";
+import logo from "../sources/logo.svg";
+import pic from "../sources/pic.svg";
 
-const Homepage = () => {
+import PropTypes from "prop-types";
+
+const Homepage = ({ setShowDash }) => {
   return (
-    <>
-      <img className="logo" src="../sources/logo.svg" />
-      <div className="first">
-        <div>
-          <h1 className="welcome-to-your-dashboard">
-            Welcome to your
-            <br />
-            Dashboard
-          </h1>
-          <div className="this-is-the-homepage">
-            This is the homepage of your
-            <br />
-            file explorer, set your pin and start
+    <div className={classes.main}>
+      <div>
+        <img className={classes.logo} src={logo} />
+        <div className={classes.div1}>
+          <div>
+            <h1>Welcome to your Dashboard</h1>
+            <div>
+              This is the homepage of your file explorer, set your pin and start
+            </div>
           </div>
+          <img src={pic} />
         </div>
-        <img className="pic" src="../sources/pic.svg" />
       </div>
-      <Form />
-    </>
+      <div>
+        <Form setShowDash={setShowDash} />
+      </div>
+    </div>
   );
 };
 
+Homepage.propTypes = {
+  setShowDash: PropTypes.func,
+};
 export default Homepage;

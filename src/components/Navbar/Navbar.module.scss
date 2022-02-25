@@ -8,40 +8,41 @@
   left: 30%;
   top: 5%;
   border-radius: 15px;
-  background: rgb(179, 219, 235);
+  background: rgb(119, 115, 115);
 }
 .menu {
   width: 100%;
   overflow: auto;
   border-radius: 15px;
-  background: rgb(179, 219, 235);
-}
-.menu ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  line-height: 50px;
-}
-.menu li {
-  float: right;
-  padding: 0px 20px 5px 5px;
-}
-.menu ul li a {
-  width: 100px;
-  transition: all 0.3s ease 0s;
-}
-.menu li a:hover {
-  position: relative;
-  color: rgb(168, 18, 228);
-  width: 100px;
-  height: auto;
-  display: block;
-  z-index: 999;
+  background: #f8fafa;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: 50px;
+
+    li {
+      float: right;
+      padding: 10px 10px 10px 10px;
+
+      a {
+        width: 100px;
+        padding: 10px 10px 10px 10px;
+        border: 1px solid #4e177c;
+        border-radius: 5px;
+      }
+      a:hover {
+        position: relative;
+        color: rgb(228, 101, 43);
+        border: 3px solid rgb(228, 101, 43);
+      }
+    }
+  }
 }
 
 .search_bar {
   margin: 15px;
-  margin-left: 100px;
+  margin-left: 50px;
   float: left;
 }
 input {

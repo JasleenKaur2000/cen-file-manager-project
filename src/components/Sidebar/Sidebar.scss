@@ -1,4 +1,47 @@
-@import "styles/variables";
+.sidebarOuter {
+  background: #c5c1c1;
+  height: 100vh;
+  width: 500px;
+}
+.sidebar {
+  background-color: rgb(231, 236, 238);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-.header {
+  position: absolute;
+  width: 450px;
+  height: 85vh;
+  left: 20px;
+  top: 100px;
+}
+.lock {
+  position: absolute;
+  background-color: #483ddb;
+  width: 281px;
+  height: 44px;
+  left: 70px;
+  top: 700px;
+}
+
+.sidebarInner {
+  position: absolute;
+  width: 281px;
+  height: 380px;
+  left: 50px;
+  top: 243.27px;
+  display: flex;
+  flex-direction: column;
+}
+.buttonset1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 5px 5px 5px;
+  button {
+    left: 15px;
+    margin: -400px 5px 20px 12px;
+    border: 1px solid #4e177c;
+  }
 }

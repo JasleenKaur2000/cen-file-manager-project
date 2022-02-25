@@ -1,6 +1,6 @@
-import Sidebar from "components/Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "../Navbar/Navbar";
 
 const Mainpage = () => {
   return (
@@ -11,6 +11,7 @@ const Mainpage = () => {
       <div>
         <Sidebar />
       </div>
+      <div>{/* <Explorer /> */}</div>
     </>
   );
 };
