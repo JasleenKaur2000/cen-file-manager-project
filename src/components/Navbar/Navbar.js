@@ -85,7 +85,6 @@ const Navbar = ({
       setShowFileContentModal(true);
     }
   };
-  // console.log(setCrumbsAndKey,showCreateFolder);
   return (
     <div className={classes.cover}>
       <div>
