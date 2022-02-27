@@ -7,11 +7,13 @@ import CreateFolder from "Hooks&Modals/CreateFolder";
 import FileContent from "Hooks&Modals/FileContent";
 
 import PropTypes from "prop-types";
+import Reset from "Hooks&Modals/Reset";
+import Unlock from "Hooks&Modals/Unlock";
 
 const initData = [{ key: "0", label: "My Files", type: "folder", parent: "" }];
 const initCrumbsAndKey = { crumbs: "My Files / ", key: "0" };
 
-const Dashboard = () => {
+const Dashboard = ({ setAccountPin, AccountPin }) => {
   const [crumbsAndKey, setCrumbsAndKey] = useState(initCrumbsAndKey);
 
   //to show 'Create Folder Modal'
@@ -19,7 +21,10 @@ const Dashboard = () => {
 
   //to show 'Create File Modal'
   const [showCreateFile, setShowCreateFile] = useState(false);
-
+  const [darkMode, setDarkMode] = useState(false);
+  const [showResetPinModal, setShowResetPinModal] = useState(false);
+  // to show enter pin/lockscreen darkmode
+  const [lock, setLock] = useState(false);
   //to display contents of currently clicked folder below navbar
   const [displayContents, setDisplayContents] = useState([]);
 
@@ -50,7 +55,12 @@ const Dashboard = () => {
   const crumbsAndKeyHandler = (crumbsAndKey) => {
     setCrumbsAndKey(crumbsAndKey);
   };
-
+  const lockHandler = () => {
+    setLock(true);
+  };
+  const darkModeHandler = () => {
+    setDarkMode((x) => !x);
+  };
   const createFileFolderHandler = (data) => {
     if (data.type === "folder") {
       let list = [];
@@ -117,18 +127,27 @@ const Dashboard = () => {
     }
   };
   return (
-    <div className={classes.dashclass}>
+    <div
+      className={
+        darkMode ? `${classes.dashclass} ${classes.dark}` : classes.dashclass
+      }
+    >
       <Sidebar
         enterCrumbsAndKey={crumbsAndKeyHandler}
         showCreateFolder={setShowCreateFolder}
         showCreateFile={setShowCreateFile}
         treeData={initData}
+        lockIt={lockHandler}
+        isDarkMode={darkMode}
       />
       <Navbar
         crumbs={crumbsAndKey.crumbs}
         showCreateFolder={setShowCreateFolder}
         showCreateFile={setShowCreateFile}
         key_={crumbsAndKey.key}
+        DarkModeHandler={darkModeHandler}
+        isDarkMode={darkMode}
+        setShowResetPinModal={setShowResetPinModal}
         displayContents={displayContents}
         setCrumbsAndKey={setCrumbsAndKey}
         setShowFileContentModal={setShowFileContentModal}
@@ -149,7 +168,21 @@ const Dashboard = () => {
           createFileFolderHandler={createFileFolderHandler}
         />
       )}
+      {showResetPinModal && (
+        <Reset
+          setShowResetPinModal={setShowResetPinModal}
+          setLock={setLock}
+          setAccountPin={setAccountPin}
+        />
+      )}
 
+      {lock && (
+        <Unlock
+          isDarkMode={darkMode}
+          setLock={setLock}
+          AccountPin={AccountPin}
+        />
+      )}
       {showFileContentModal && (
         <FileContent
           fileDetails={fileDetails}

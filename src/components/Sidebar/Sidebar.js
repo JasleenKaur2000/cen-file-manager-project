@@ -8,13 +8,15 @@ import logo from "../sources/logo.svg";
 import PropTypes from "prop-types";
 
 const Sidebar = ({
+  lockIt,
+  isDarkMode,
   enterCrumbsAndKey,
   treeData = [],
   showCreateFolder,
   showCreateFile,
 }) => {
   useEffect(() => {
-    const sidebar = document.querySelector(`.${classes.sidebarInner}`);
+    const sidebar = document.querySelector(`.${classes.div1}`);
     let startX, startWidth;
     const resizer = document.querySelector(`.${classes.resizer}`);
 
@@ -47,29 +49,46 @@ const Sidebar = ({
   const addFileHandler = () => {
     showCreateFile(true);
   };
+  const lockButtonHandler = (e) => {
+    e.preventDefault();
+    lockIt();
+  };
   return (
-    <div className={`${classes.sidebarOuter}`}>
+    <div className={`${isDarkMode ? classes.div1_dark : classes.div1}`}>
       <div>
         <img src={logo} />
       </div>
       <div className={`${classes.sidebar}`}>
         <div className={`${classes.sidebarInner}`}>
           <ButtonGroup className={classes.buttonset1}>
-            <Button onClick={addFileHandler}>
+            <Button
+              className={isDarkMode ? classes.add_dark : classes.add}
+              onClick={addFileHandler}
+            >
               <AiOutlineFileAdd />
               Add File
             </Button>
-            <Button onClick={addFolderHandler}>
+            <Button
+              className={isDarkMode ? classes.add_dark : classes.add}
+              onClick={addFolderHandler}
+            >
               <AiOutlineFolderAdd />
               Add Folder
             </Button>
           </ButtonGroup>
           <div className={classes.tree}>
-            <Tree treeData={treeData} enterCrumbsAndKey={enterCrumbsAndKey} />
+            <Tree
+              treeData={treeData}
+              enterCrumbsAndKey={enterCrumbsAndKey}
+              isDarkMode={isDarkMode}
+            />
           </div>
         </div>
         <div>
-          <Button className={classes.lock}>
+          <Button
+            className={isDarkMode ? classes.lock_button_dark : classes.lock}
+            onClick={lockButtonHandler}
+          >
             <p>Lock</p>
           </Button>
         </div>
@@ -82,6 +101,8 @@ const Sidebar = ({
   );
 };
 Sidebar.propTypes = {
+  lockIt: PropTypes.func,
+  isDarkMode: PropTypes.bool,
   crumbsAndKey: PropTypes.object,
   enterCrumbsAndKey: PropTypes.func,
   treeData: PropTypes.array,

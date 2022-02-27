@@ -3,7 +3,7 @@ import HelperTree from "./HelperTree";
 import classes from "./Tree.module.scss";
 import PropTypes from "prop-types";
 
-const Tree = ({ enterCrumbsAndKey, treeData = [] }) => {
+const Tree = ({ isDarkMode, enterCrumbsAndKey, treeData = [] }) => {
   console.log(treeData, typeof treeData);
   let crumbString = "";
   return (
@@ -12,6 +12,7 @@ const Tree = ({ enterCrumbsAndKey, treeData = [] }) => {
         crumbString={crumbString}
         enterCrumbsAndKey={enterCrumbsAndKey}
         data={treeData}
+        isDarkMode={isDarkMode}
       />
     </div>
   );

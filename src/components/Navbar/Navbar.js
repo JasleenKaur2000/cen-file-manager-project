@@ -13,6 +13,9 @@ import smallFileIcon from "../sources/smallFile.svg";
 import smallFolderIcon from "../sources/smallClosedFolder.svg";
 
 const Navbar = ({
+  isDarkMode,
+  DarkModeHandler,
+  setShowResetPinModal,
   crumbs,
   key_,
   showCreateFolder,
@@ -23,7 +26,7 @@ const Navbar = ({
   allFilesFolders = [],
 }) => {
   const [showAddOptions, setShowAddOptions] = useState(false);
-
+  const [showResetPinOption, setShowResetPinOption] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
@@ -41,7 +44,9 @@ const Navbar = ({
       setFilteredData(newFilter);
     }
   };
-
+  const modeClickHandler = () => {
+    DarkModeHandler();
+  };
   let list = [];
   if (localStorage.getItem(key_) !== null) {
     list = JSON.parse(localStorage.getItem(key_));
@@ -49,7 +54,9 @@ const Navbar = ({
   const showAddOptionsHandler = () => {
     setShowAddOptions((x) => !x);
   };
-
+  const showResetPinHandler = () => {
+    setShowResetPinOption((x) => !x);
+  };
   const iconIdentifier = (type) => {
     if (type === "folder") return folderIcon;
     if (type === "imageFile") return imageFileIcon;
@@ -64,7 +71,10 @@ const Navbar = ({
     e.preventDefault();
     showCreateFile(true);
   };
-
+  const onClickResetPinHandler = (e) => {
+    e.preventDefault();
+    setShowResetPinModal(true);
+  };
   const onClickSearchResultsHandler = (obj) => {
     setFilteredData([]);
     setWordEntered("");
@@ -87,12 +97,15 @@ const Navbar = ({
   };
   return (
     <div className={classes.cover}>
-      <div>
-        <div>
+      <div className={isDarkMode ? classes.outer_dark : classes.outer}>
+        <div className={isDarkMode ? classes.nav_dark : classes.nav}>
           <div className={classes.search}>
-            <div>
+            <div className={isDarkMode ? classes.bar_dark : classes.bar}>
               <img src={search_icon} />
               <input
+                className={
+                  isDarkMode ? `${classes.searchbar_dark}` : classes.searchbar
+                }
                 value={wordEntered}
                 onChange={handleFilter}
                 type="text"
@@ -123,43 +136,62 @@ const Navbar = ({
             )}
           </div>
 
-          <button className={classes.modes}>
+          <button className={classes.modes} onClick={modeClickHandler}>
             <div>
               <img src={beam}></img>
-              <p>dl mode</p>
+              <p>{isDarkMode ? "Light Mode" : "Dark Mode"}</p>
             </div>
           </button>
 
-          <button onClick={showAddOptionsHandler}>
+          <button
+            onClick={showAddOptionsHandler}
+            className={
+              isDarkMode ? ` ${classes.settings_dark}` : classes.settings
+            }
+          >
             <img src={addIcon} />
           </button>
 
           {showAddOptions && (
             <div className={classes.backdrop} onClick={showAddOptionsHandler}>
-              <div>
+              <div
+                className={
+                  isDarkMode ? classes.addOptions_dark : classes.addOptions
+                }
+              >
                 <button onClick={onClickCreateFileHandler}>New File</button>
                 <button onClick={onClickCreateFolderHandler}>New Folder</button>
               </div>
             </div>
           )}
 
-          <button>
+          <button
+            className={
+              isDarkMode ? `${classes.settings_dark}` : classes.settings
+            }
+            onClick={showResetPinHandler}
+          >
             <img src={settings_icon} />
           </button>
 
-          {/* {showResetPinOption && (
+          {showResetPinOption && (
             <div className={classes.backdrop} onClick={showResetPinHandler}>
-              <div className={isDarkMode?classes.addOptions_dark:classes.addOptions}>
-                <button  onClick={onClickResetPinHandler}>Reset Pin</button>
+              <div
+                className={
+                  isDarkMode ? classes.addOptions_dark : classes.addOptions
+                }
+              >
+                <button onClick={onClickResetPinHandler}>Reset Pin</button>
               </div>
             </div>
-            )
-            } */}
+          )}
         </div>
 
-        <div>{crumbs}</div>
+        <div className={isDarkMode ? classes.crumbs_dark : classes.crumbs}>
+          {crumbs}
+        </div>
       </div>
-      <div>
+      <div className={isDarkMode ? classes.contents_dark : classes.contents}>
         {list &&
           list.length > 0 &&
           list.map((obj) => (
@@ -169,7 +201,13 @@ const Navbar = ({
               onClick={() => onClickFileFolderHandler(obj)}
             >
               <img src={iconIdentifier(obj.type)} />
-              <p>{obj.label}</p>
+              <p
+                className={
+                  isDarkMode ? classes.icon_name_dark : classes.icon_name
+                }
+              >
+                {obj.label}
+              </p>
             </div>
           ))}
       </div>
@@ -177,6 +215,8 @@ const Navbar = ({
   );
 };
 Navbar.propTypes = {
+  isDarkMode: PropTypes.bool,
+  DarkModeHandler: PropTypes.func,
   crumbs: PropTypes.string,
   setCrumbsAndKey: PropTypes.func,
   displayContents: PropTypes.array,

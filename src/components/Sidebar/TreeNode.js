@@ -4,8 +4,9 @@ import HelperTree from "./HelperTree";
 import openFolder from "../sources/smallOpenFolder.svg";
 import closedFolder from "../sources/smallClosedFolder.svg";
 import file_icon from "../sources/smallFile.svg";
+import classes from "./TreeNode.module.scss";
 
-const TreeNode = ({ node, crumbString, enterCrumbsAndKey }) => {
+const TreeNode = ({ node, isDarkMode, crumbString, enterCrumbsAndKey }) => {
   const [childVis, setChildVis] = useState(false);
   const children = JSON.parse(localStorage.getItem(node.key));
   const hasChild = children && children.length > 0 ? true : false;
@@ -25,7 +26,10 @@ const TreeNode = ({ node, crumbString, enterCrumbsAndKey }) => {
   };
   return (
     <li>
-      <div onClick={onClickHandler}>
+      <div
+        className={isDarkMode ? classes.folder_dark : classes.folder}
+        onClick={onClickHandler}
+      >
         <img src={iconSelector()} />
         {node.label}
       </div>
@@ -37,6 +41,7 @@ const TreeNode = ({ node, crumbString, enterCrumbsAndKey }) => {
               enterCrumbsAndKey={enterCrumbsAndKey}
               crumbString={crumbString}
               data={children}
+              isDarkMode={isDarkMode}
             />
           </ul>
         </div>
