@@ -1,4 +1,3 @@
-# Frontend-Project
-#Cuvette-Frontend Cohort
+# Cuvette-Frontend Cohort
 File Explorer
 
